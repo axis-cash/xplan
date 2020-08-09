@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "./static/css/main.70fb2f2f.chunk.css",
+    "main.js": "./static/js/main.80eee292.chunk.js",
+    "runtime~main.js": "./static/js/runtime~main.7b902c7e.js",
+    "static/css/2.1c37a082.chunk.css": "./static/css/2.1c37a082.chunk.css",
+    "static/js/2.44e89387.chunk.js": "./static/js/2.44e89387.chunk.js",
+    "index.html": "./index.html",
+    "precache-manifest.bf8d00550f88a12101f3714c80f1c6b2.js": "./precache-manifest.bf8d00550f88a12101f3714c80f1c6b2.js",
+    "service-worker.js": "./service-worker.js",
+    "static/js/0.0d732017.chunk.worker.js": "./static/js/0.0d732017.chunk.worker.js",
+    "static/js/1.073e53db.chunk.worker.js": "./static/js/1.073e53db.chunk.worker.js",
+    "static/media/add_empty@3x.png": "./static/media/add_empty@3x.de080d87.png",
+    "static/media/asset_empty@3x.png": "./static/media/asset_empty@3x.7cbf1781.png",
+    "static/media/home_bg@3x.png": "./static/media/home_bg@3x.46730044.png",
+    "static/media/home_bg@3x_2.png": "./static/media/home_bg@3x_2.00bc1fb0.png",
+    "static/media/mine_logo@2x.png": "./static/media/mine_logo@2x.af6ca31d.png",
+    "static/media/touxiang_01@2x.png": "./static/media/touxiang_01@2x.85d7b1c5.png",
+    "static/media/touxiang_02@2x.png": "./static/media/touxiang_02@2x.422ed0d1.png",
+    "static/media/touxiang_08@2x.png": "./static/media/touxiang_08@2x.a8fc5162.png",
+    "static/media/touxiang_09@2x.png": "./static/media/touxiang_09@2x.2325d948.png"
+  }
+}

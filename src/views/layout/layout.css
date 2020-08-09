@@ -1,0 +1,49 @@
+.tabbar {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    z-index: 999;
+    background:#f5f5f9
+}
+
+.layout-top{
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 9999;
+}
+.tabbarimg{
+    width: 25px;
+}
+
+.appbtmbar{
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    z-index: 999;
+    background: #1A1A1B;
+    flex-direction: row;
+    display: flex;
+}
+.appbtmbar a{
+    flex: 1;
+    text-align: center;
+    padding: 5px 0;
+    color: #DFDFDF;
+    font-size: 12px;
+}
+.appbtmbar a.active/*,.appbtmbar a:hover,.appbtmbar a:active*/{
+    background: #CAAC7B;
+    color: #000000;
+}
+.appbtmbar a img{
+    width: 24px;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 5px;
+}
+.appbtmbar a img:nth-child(1){display: block;}
+.appbtmbar a img:nth-child(2){display: none;}
+.appbtmbar a.active img,.appbtmbar a:hover img,.appbtmbar a:active img{}
+.appbtmbar a.active img:nth-child(1),.appbtmbar a:hover img:nth-child(1),.appbtmbar a:active img:nth-child(1){display:none;}
+.appbtmbar a.active img:nth-child(2),.appbtmbar a:hover img:nth-child(2),.appbtmbar a:active img:nth-child(2){display:block;}

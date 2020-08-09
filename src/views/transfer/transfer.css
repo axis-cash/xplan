@@ -1,0 +1,322 @@
+.bottom-p {
+    text-align: center;
+    color: #24bdd2;
+    font-size: 17px;
+    height: 60px;
+}
+
+.income-span {
+    color: #24bdd2;
+    /*letter-spacing: 0.02em;*/
+}
+
+.payout-span {
+    color: #198fea;
+}
+
+.bottom-button-div {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    background: #1A1A1B;
+    padding: 10px 5px;
+}
+
+.bottom-button-div-left {
+    width: 30%;
+    float: left;
+    /* padding: 0 2px; */
+    margin-left: 10px;
+}
+
+.bottom-button-div-right {
+    width: 60%;
+    float: right;
+    margin-right: 15px;
+    padding: 0 2px;
+}
+
+.bottom-button-div-receive {
+    background: #DBBF91;
+    color: #1A1A1B;
+    font-size: 14px;
+}
+
+.bottom-button-div-transfer {
+    background: #F55959;
+    color: #1A1A1B;
+    font-size: 14px;
+}
+
+.transfer-nav-header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1;
+}
+
+.transfer-detail {
+    height: 600px;
+    border-radius: 15px;
+    background: none;
+    color: #DFDFDF;
+    filter: progid:DXImageTransform.Microsoft.Shadow(color=#ddd, direction=120, strength=4);
+}
+
+.transfer-detail-bg {
+    background: linear-gradient(to bottom,#198fea,#f7f7f7);
+    background:#1A1A1B;
+}
+
+.transfer-detail-nav {
+    background: linear-gradient(to bottom,#0061b8,#198fea)
+}
+
+.transfer-detail-indiv0{
+    height: auto;
+    margin: 0 15px 35px;
+    text-align: center;
+    padding-bottom: 35px;
+    border-bottom: 1px solid #E1E1E1;
+}
+.transfer-detail-indiv0 img{
+    width: 50px;
+    height: 50px;
+}
+.transfer-detail-indiv0 h3{
+    margin:20px 0 5px 0;
+}
+.transfer-detail-indiv0-icon{
+    color: rgb(50, 161, 74);
+    position: relative;
+    top: 10px;
+}
+
+.transfer-detail-indiv0-span{
+    color: rgb(136, 136, 136);
+    position: relative;
+    font-size: 12px;
+}
+
+
+
+.transfer-detail-indiv1{
+    border-bottom: 1px solid #E1E1E1;
+    height: 40%;
+    margin: 0 15px 25px;
+}
+
+.transfer-detail-flex-content{
+    flex-basis: 80%;
+}
+
+.transfer-detail-copy-icon{
+    color: #cac4c4;
+    width: 14px;
+    height: 14px;
+}
+
+.transfer-detail-p{
+    text-align: center;
+}
+
+
+/* transfer */
+
+.coin {
+    min-height: 100px;
+    background: #1A1A1B;
+    font-size: 14px;
+    color: #DFDFDF;
+
+}
+
+.coin .title {
+    height: 30px;
+    line-height: 3;
+    padding: 0px 10px;
+}
+
+.coin .title .left {
+    width: 20%;
+    float: left;
+    text-align: left;
+}
+
+.coin .title .right {
+    width: 80%;
+    float: right;
+    text-align: right;
+    color: #008cec;
+}
+
+.coin .content {
+    height: 70px;
+}
+
+.address {
+    height: 150px;
+    background: #1A1A1B;
+    font-size: 14px;
+    overflow: hidden;
+    color: #DFDFDF;
+}
+
+.address .title {
+    height: 30px;
+    line-height: 3;
+    padding: 0px 10px;
+}
+
+.address .title .left {
+    width: 50%;
+    float: left;
+    text-align: left;
+}
+
+.address .title .right {
+    width: 50%;
+    float: right;
+    text-align: right;
+    color: #008cec;
+}
+
+.address .content {
+    /*height: 70px;*/
+    float: left;
+    width: 100%;
+    position:relative;
+}
+
+
+.fee {
+    padding: 10px 0;
+    background: #1A1A1B;
+    font-size: 14px;
+    overflow: hidden;
+    clear: both;
+    color: #DFDFDF;
+}
+
+.fee .title {
+    height: 30px;
+    line-height: 1.8;
+    padding: 0px 10px;
+}
+
+.fee .title .left {
+    width: 20%;
+    float: left;
+    text-align: left;
+}
+
+.fee .title .right {
+    width: 80%;
+    float: left;
+    text-align: left;
+    color: #CAAC7B;
+}
+
+.fee .content {
+    height: 70px;
+    float: left;
+    width: 100%;
+}
+
+.transfer-receive-header{
+    background: #ffffff;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+    text-align: center;
+    color: #222222;
+    padding: 30px 0px 15px;
+}
+
+.transfer-receive-body{
+    background: #fff;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    text-align: center;
+    padding: 0 15px;
+}
+
+.transfer-receive-icon{
+    text-align: center;
+    background-color: #f7f7f7;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    padding: 3px;
+}
+
+.transfer-receive-border{
+    padding: 50px 15px 0px;
+
+}
+
+.transfer-receive-header-hash{
+    overflow-wrap: break-word;
+    padding: 5px 15px 20px;
+    font-size: 12px;
+}
+
+.transfer-result-hash {
+    overflow-wrap: break-word;
+    font-size: 15px;
+    color: #333;
+    font-weight: 800;
+    background: #f7f7f7;
+    text-align: center;
+    padding: 15px;
+}
+
+.transfer-bottom-button{
+    position: fixed;
+    bottom: 0;
+    width: 97%;
+    padding: 5px;
+}
+
+.am-tabs-default-bar .am-tabs-default-bar-animated .am-tabs-default-bar-top{
+    background-color: #f7f7f7 !important;
+}
+
+.transfer-address{
+    float: right;
+    bottom: 152px;
+    position: absolute;
+    color: #008cec;
+    width: 20px;
+    margin: 15px 5px 0;
+    top:-34px;
+}
+
+.am-list-body{
+    background:#0B0B0C;
+}
+
+.am-list-item .am-input-control .fake-input-container .fake-input{
+    color:#DFDFDF;
+}
+.am-textarea-control textarea{
+    color:#DFDFDF;
+}
+
+html:not([data-scale]) .am-button::before{
+    border:0 !important;
+}
+
+.content .am-textarea-control{
+    padding-top:0;
+}
+.content .am-list-item.am-textarea-item{
+    padding-left:10px;
+    padding-right: 10px;
+    text-align: justify;
+}
+.coin .am-list-item.am-input-item.am-list-item-middle{
+    padding-left: 10px;
+}

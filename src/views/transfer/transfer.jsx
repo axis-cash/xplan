@@ -1,0 +1,371 @@
+import React, {Component} from 'react'
+import {WhiteSpace, InputItem, TextareaItem, WingBlank, Icon, NavBar, Button, Toast, Modal, List} from 'antd-mobile'
+import {lang, url} from "../../config/common";
+import Account from "../../components/account/account";
+import {validPkr} from "jsuperzk/dist/wallet/wallet"
+import {createForm} from 'rc-form';
+import {Transactions} from "../../components/tx/transactions";
+import {decimals} from "../../components/tx/decimals";
+import BigNumber from "bignumber.js";
+import {assetService} from "../../components/service/service";
+
+let account = new Account()
+const defaultFee = "0.00002500";
+
+class Form extends Component {
+
+    constructor(props) {
+        super(props);
+        this.amountDecorator = this.props.form.getFieldDecorator('amount', {
+            rules: [{required: true}],
+        });
+        this.addressDecorator = this.props.form.getFieldDecorator('address', {
+            rules: [{required: true}],
+        });
+
+        this.state = {
+            confirming: false,
+            total: 0,
+        }
+
+    }
+
+    checkConfirming = () => {
+        let that = this;
+        this.props.form.validateFields((error, value) => {
+            if (value["amount"] && value["address"]) {
+                that.setState({
+                    total: new BigNumber(value["amount"]).toString(10)
+                })
+            }
+        })
+    }
+
+    componentDidMount() {
+        //AXIS新修改
+        if (this.props.address) {
+            if (!validPkr(this.props.address.substr(0,1) == 'X' ? this.props.address.substr(1) : this.props.address)) {
+                Toast.fail(lang.e().toast.error.invalidAddress, 2)
+            } else {
+                let that = this;
+                const {setFieldsValue} = this.props.form;
+                setFieldsValue({
+                    address: that.props.address
+                })
+            }
+        }
+    }
+
+    submit() {
+        let that = this;
+        that.setState({
+            confirming: true
+        });
+        this.props.form.validateFields((error, value) => {
+            if (!value["address"]) {
+                Toast.fail(lang.e().page.txTransfer.inputAddress, 1.5)
+                that.setState({
+                    confirming: false
+                });
+                return
+            }
+            if (!value["amount"] || parseFloat(value["amount"]) === 0) {
+                Toast.fail(lang.e().page.txTransfer.inputAmount, 1.5)
+                that.setState({
+                    confirming: false
+                });
+                return
+            }
+            if (this.props.currency === "AXIS") {
+                if (new BigNumber(value["amount"]).plus(new BigNumber(defaultFee)).comparedTo(new BigNumber(that.props.amount)) === 1) {
+                    Toast.fail(lang.e().toast.error.notEnough, 1.5)
+                    that.setState({
+                        confirming: false
+                    });
+                    return
+                }
+            } else {
+                account = new Account();
+                account.getCurrent().then(detail=>{
+                    assetService.balanceOf(detail.tk).then(data=>{
+                        if(data && typeof data === 'object'){
+                            data.forEach((amount,cy)=>{
+                                if(cy ===  'AXIS'){
+                                    if (new BigNumber(defaultFee).comparedTo(amount) === 1) {
+                                        Toast.fail(lang.e().toast.error.notEnoughFee, 1.5)
+                                        that.setState({
+                                            confirming: false
+                                        });
+                                    }
+                                    if (new BigNumber(value["amount"]).comparedTo(new BigNumber(that.props.amount)) === 1) {
+                                        Toast.fail(lang.e().toast.error.notEnough, 1.5)
+                                        that.setState({
+                                            confirming: false
+                                        });
+                                    }
+                                }
+                            })
+                        }
+                    })
+                });
+            }
+
+            //AXIS修改判断
+            value["address"] = value["address"].substr(0,1) == 'X' ? value["address"].substr(1) : value["address"];
+            if (!validPkr(value["address"])) {
+                Toast.fail(lang.e().toast.error.invalidAddress, 1.5)
+                that.setState({
+                    confirming: false
+                });
+                return
+            }
+            {
+                if (error == null) {
+                    Modal.prompt(lang.e().page.txTransfer.inputPassword, lang.e().page.txTransfer.passwordMsg, [{
+                        text: lang.e().button.cancel, onPress: () => {
+                            that.setState({
+                                confirming: false
+                            });
+                        }
+                    }, {
+                        text: lang.e().button.confirm, onPress: (password) => {
+                            if (!password) {
+                                Toast.fail(lang.e().page.txTransfer.inputPassword, 1.5);
+                                that.setState({
+                                    confirming: false
+                                });
+                                return
+                            }
+                            Toast.loading(lang.e().toast.loading.sending,120)
+                            const transaction = new Transactions(that.props.pk);
+                            let tx = {
+                                // from:,
+                                to: value["address"],
+                                // data:"",
+                                cy: that.props.cy,
+                                value: decimals.mul(value["amount"], that.props.cy, 0),
+                                gas: 25000,
+                                gasPrice: 1000000000
+                            }
+
+                            transaction.transfer(tx, password).then(data=>{
+                                if (data) {
+                                    Toast.success(lang.e().toast.success.send, 2)
+                                    setTimeout(function () {
+                                        url.goPage(url.transferDetail(data), url.transferList(that.props.cy))
+                                    }, 1500)
+                                }
+                            }).catch(e=>{
+                                if(typeof e === "object"){
+                                    e = e.message;
+                                }
+                                if (e.indexOf("wrong passphrase") > -1) {
+                                    Toast.fail(lang.e().toast.error.passwordError, 2);
+                                } else if (e.indexOf("no enough") > -1) {
+                                    Toast.fail(lang.e().toast.error.notEnough, 2);
+                                } else {
+                                    Toast.fail(e, 3);
+                                }
+                                that.setState({
+                                    confirming: false
+                                });
+                            })
+
+                        }
+                    }], 'secure-text', null, [lang.e().page.txTransfer.inputPassword]);
+                }
+            }
+        });
+    }
+
+    render() {
+        let {cy, amount} = this.props;
+        return <div>
+            <div className='coin'>
+                <WingBlank>
+                    <div className='title'>
+                        <div className='left'><strong>{cy}</strong></div>
+                        <div className='right' style={{color:'#AFAFAF',fontSize:'14px'}}>
+                            {lang.e().page.txTransfer.balance}：{amount} {cy}
+                        </div>
+                    </div>
+                    {/*<div className='content'>*/}
+                        {
+                            this.amountDecorator(
+                                <InputItem
+                                    placeholder={lang.e().page.txTransfer.inputAmount}
+                                    type='money'
+                                    name='amount'
+                                    moneyKeyboardAlign='left'
+                                    onBlur={this.checkConfirming}
+                                    onChange={this.checkConfirming}
+                                />
+                            )
+                        }
+                    {/*</div>*/}
+                </WingBlank>
+            </div>
+
+            <div style={{height:"10px"}}></div>
+            {/*<WhiteSpace size="lg"/>*/}
+            <div className='address'>
+                <WingBlank>
+                    <div className='title'>
+                        <div>{lang.e().page.txTransfer.address}</div>
+                    </div>
+                    <div className='content'>
+                        {
+                            this.addressDecorator(
+                                <TextareaItem
+                                    placeholder={lang.e().page.txTransfer.inputAddress}
+                                    rows='4'
+                                    name='address'
+                                    style={{fontSize: ' 12px',paddingTop:"10px"}}
+                                    onBlur={this.checkConfirming}
+                                    onChange={this.checkConfirming}
+                                />
+                            )
+                        }
+                        <img src={require('../../public/images/transaction_add@2x.png')} className="transfer-address" style={{right:"0"}} onClick={() => {
+                            url.goPage(url.addressSelect(cy), url.transfer(cy + (this.props.address ? "/" + this.props.address : "")))
+                        }}/>
+                        <img src={require('../../public/images/transaction_scan@2x.png')} className="transfer-address" style={{right:"35px"}}onClick={() => {
+                            url.goPage(url.scan("transfer",cy), url.transfer(cy))
+                        }}/>
+
+                        {/*<Icon type="iconAddressbook-" className="transfer-address" onClick={() => {*/}
+                            {/*url.goPage(url.addressSelect(cy), url.transfer(cy + (this.props.address ? "/" + this.props.address : "")))*/}
+                        {/*}}/>*/}
+                    </div>
+                </WingBlank>
+            </div>
+            <div style={{height:"10px"}}></div>
+            {/*<WhiteSpace size="lg"/>*/}
+            <div className='fee'>
+                <WingBlank>
+                    <div className='title'>
+                        <div className='left'>{lang.e().page.txTransfer.fee} </div>
+                        <div className='right' style={{textAlign: 'right'}}>
+                            <span style={{fontSize: '14px'}}>{defaultFee} AXIS</span><br/>
+                            <span style={{
+                                fontSize: '12px',
+                                color: "rgb(136, 136, 136)"
+                            }}>Gas(25000) * GasPrice(1Gta)</span>
+                        </div>
+                    </div>
+                </WingBlank>
+            </div>
+            <div style={{height:"10px"}}></div>
+            {/*<WhiteSpace size="lg"/>*/}
+            <div className='fee'>
+                <WingBlank>
+                    <div className='title'>
+                        <div className='left'>{lang.e().page.txTransfer.total} </div>
+                        <div className='right' style={{textAlign: 'right',color:'#DFDFDF'}}>
+                            {
+                                "AXIS" === this.props.cy ? <div>
+                                    <span style={{
+                                        fontSize: '14px',
+                                        color: "#DFDFDF",
+                                        fontWeight: "bold"
+                                    }}>{new BigNumber(this.state.total).plus(new BigNumber(defaultFee)).toString(10)}</span> {this.props.cy}
+                                </div> : <div>
+                                    <span style={{
+                                        fontSize: '14px',
+                                        color: "#DFDFDF",
+                                        fontWeight: "bold"
+                                    }}>{this.state.total}</span> {this.props.cy}
+                                    <br/><span style={{
+                                    fontSize: '14px',
+                                    color: "#DFDFDF",
+                                    fontWeight: "bold"
+                                }}>+ {defaultFee}</span> AXIS
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </WingBlank>
+            </div>
+            <WhiteSpace/>
+
+            <div className="btn-bottom">
+                <Button type="primary" disabled={this.state.confirming} onClick={()=>{this.submit()}} >{lang.e().button.next}</Button>
+                {/*<Button type="primary" disabled={true}>{lang.e().button.openTip}</Button>*/}
+            </div>
+        </div>
+    }
+
+}
+
+const TransferForm = createForm()(Form);
+
+class Transfer extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            amount: 0,
+            currency: 'AXIS',
+            current: '',
+            detail: {}
+        }
+    }
+
+    componentDidMount() {
+        const that = this;
+        that.init().then();
+    }
+
+    async init(){
+        const that = this;
+        const currency = that.props.match.params.currency;
+        const current = await account.getCurrent();
+        // account = new Account(current.address);
+        const detail = await account.Detail(current.address);
+        const data = await assetService.balanceOf(detail.tk);
+        if(data && typeof data === 'object'){
+            data.forEach((amount,cy)=>{
+                if(cy ===  currency){
+                    amount = decimals.convert(amount, currency);
+                    that.setState({
+                        amount: amount,
+                    })
+                }
+            })
+        }
+        that.setState({
+            currency: currency,
+            current: current,
+            detail: detail,
+        })
+    }
+
+    render() {
+        const {currency, detail, amount} = this.state;
+        return <div style={{height: document.documentElement.clientHeight}}>
+            <NavBar
+                style={{background:"#1A1A1B"}}
+                mode="light"
+                icon={<Icon type="left" style={{color:'#ffffff'}}/>}
+                onLeftClick={() => {
+                    url.goBack();
+                }}
+                // rightContent={<Icon type="iconscan" style={{color:"#ffffff"}} onClick={
+                //
+                //     () => {
+                //         url.goPage(url.scan("transfer",currency), url.transfer(currency))
+                //     }
+                // }/>}
+            >
+                {lang.e().button.transfer}
+            </NavBar>
+            <TransferForm amount={amount} tk={detail.tk} cy={currency} address={this.props.match.params.address}/>
+
+        </div>
+    }
+
+}
+
+export default Transfer

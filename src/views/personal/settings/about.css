@@ -1,0 +1,18 @@
+.my-header{
+    /*background: rgb(60 67 86);*/
+    background-color: #f7f7f7;
+    width: 100%;
+    text-align: center;
+}
+
+.am-modal.am-modal-operation .am-modal-content .am-modal-button{
+    color:#CAAC7B;
+}
+
+.am-list-item .am-input-control input{
+    color:#DFDFDF;
+}
+
+.iteminpunpdl .am-list-item.am-input-item{
+    padding-left:0 !important;
+}

@@ -1,0 +1,85 @@
+.card-img{
+    position: relative;
+    float: right;
+    top: -60px;
+    right: 45px;
+}
+
+.card-icon{
+    position: relative;
+    top: -16px;
+    float: right;
+    color: #f3e2c8;
+}
+
+.list-address{
+    overflow-wrap: break-word; color: #DFDFDF; margin-top: 6px;font-size: 12px;
+}
+
+.textarea-bottom{
+    /*border-bottom: 1PX solid #ddd;*/
+}
+
+.address-add-iconscan{
+    position: relative;
+    float: right;
+    color: rgb(51, 51, 51);
+    right: 20px;
+    width: 20px;
+}
+
+.address-listbox{}
+.address-listbox .am-list-body{background:none}
+.address-box{
+    margin:10px;
+    background:#1A1A1B !important;
+    padding:10px;
+    border-radius:5px;
+}
+.address-listbox .am-list-line{padding-right: 0}
+
+.address-box .am-list-line::after{display: none !important;}
+.address-title{
+    overflow: hidden;
+    margin: 10px 0;
+    margin-top: 0;
+}
+.address-title span{
+    display: inline-block;
+    overflow: hidden;
+    width: calc(90% - 10px);
+    vertical-align: middle;
+    margin-right: 10px;
+}
+.address-title .am-list-brief{
+    margin-top: 0 !important;
+    font-size: 12px !important;
+    font-weight: normal !important;
+    color: #CAAC7B !important;
+}
+.address-title img{}
+
+.am-textarea-count span{
+    color:#DFDFDF !important;
+}
+
+.am-textarea-clear{
+    width: 15px !important;
+    height: 15px !important;
+    background-size: 15px auto !important;
+    background-color: #CAAC7B !important;
+}
+
+.textarea-bottom.am-list-item.am-textarea-item{background:none !important}
+
+.am-textarea-control{
+    padding-top:0;
+    padding-bottom:0;
+}
+.addcontent .am-textarea-control{
+    padding-top:5px;
+    padding-bottom:5px;
+}
+.addcontent{
+    width: 95%;
+}

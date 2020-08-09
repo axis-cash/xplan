@@ -1,0 +1,127 @@
+.btn-bottom{
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+.btn-bottom a{
+    margin: 5px;
+}
+
+.am-tag {
+    display: inline-block;
+    position: relative;
+    font-size: 14px !important;
+    text-align: center;
+    height: 25px !important;
+    line-height: 25px !important;
+    box-sizing: border-box;
+    margin: 5px;
+    padding: 0 5px !important;
+}
+
+.am-tag-normal {
+    background-color: #0B0B0C !important;
+    color: #CAAC7B !important;
+}
+
+.tag-div{
+    padding: 10px 0px;
+    min-height: 30px;
+    margin: 0 0 20px;
+    min-height: 100px;
+}
+
+
+.am-tag-disabled {
+    color: #5d5d5d !important;
+    background-color: #c7c9f3 !important;
+    border: 1PX solid #ddd;
+    border-radius: 3px;
+    letter-spacing:1px;
+}
+
+.am-tag-active {
+    background-color: #c7c9f3 !important;
+    color: #5d5d5d !important;
+    border: 1PX solid #ddd !important;
+    border-radius: 3px;
+}
+
+.customer-tag{
+    background-color: #0B0B0C !important;
+    color: #CAAC7B !important;
+    border: 1PX solid #CAAC7B !important;
+    border-radius: 3px;
+}
+
+html:not([data-scale]) .am-tag-active::before {
+    border: 1PX solid #ddd !important;
+}
+/*.am-list-line::after {*/
+/*    border-bottom: unset !important;*/
+/*}*/
+
+/*.am-list-line{*/
+/*    border-bottom: unset !important;*/
+/*}*/
+.am-button{
+    font-size: 16px;
+}
+.am-list-item{
+    background:none !important;
+}
+.am-button-primary{
+    background-color: #CAAC7B !important;
+    border: 1PX solid #CAAC7B !important;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx){
+    html:not([data-scale]) .am-button-primary::before {
+        border: 1PX solid #CAAC7B;
+    }
+}
+.am-navbar-title{
+    font-size: 16px;
+}
+.am-navbar-light .am-navbar-title{
+    color:#FFFFFF;
+}
+.am-navbar-left{
+    color:#FFFFFF;
+}
+.am-navbar-right{
+    font-size: 14px;
+}
+
+
+.backup-ul{}
+.backup-ul ul{
+    padding:0px 10px;
+    list-style-type: none;
+}
+.backup-ul ul li{
+    line-height: 0;
+}
+.backup-ul ul li h3{
+    font-weight: normal;
+}
+.backup-ul ul li h3 img{
+    width:20px;
+    vertical-align: middle;
+    margin-right: 5px;
+    margin-top:-3px;
+}
+.backup-ul ul li p{
+    font-size: 12px;
+    line-height: 20px;
+    margin-bottom:30px;
+}
+
+.nobg{background:none !important}
+
+.am-list-item-bgnone .am-list-item{
+    background:none !important;
+}
+html:not([data-scale]) .am-tag-normal::before{
+    border:0 !important;
+}

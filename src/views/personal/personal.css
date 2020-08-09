@@ -1,0 +1,85 @@
+body{
+    background: #0B0B0C !important;
+}
+.my-header{
+    /*background: rgb(60 67 86);*/
+    background-color: #f7f7f7;
+    width: 100%;
+}
+
+.my-address{
+    width: 50%;
+    float: left;
+    padding: 5px 0;
+    font-size: 16px;
+    color: #333333;
+}
+
+.am-list-item .am-list-line .am-list-content{
+    font-size:15px;
+    color:#222222;
+}
+.manage-list{}
+.manage-list .am-list-content{}
+.manage-list .am-list-content .am-list-brief{    font-size: 12px;}
+.manage-list .am-list-extra{
+    flex-basis: 12% !important;
+}
+
+.wallet-card::before{display:none !important}
+.wallet-card{
+    background: linear-gradient(119deg,#1A1A1B 0%,#1A1A1B 100%);
+    padding:15px 0;
+    border-radius:10px !important;
+}
+.wallet-card .am-card-header-content{color:#FFFFFF;font-size: 18px;}
+.wallet-card .icon-avatar{
+    background: #ffffff;
+    border-radius: 50%;
+    border: 0;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+.wallet-card .am-card-body{}
+.wallet-card .am-card-body::before{display:none !important}
+.wallet-card .am-card-body span{
+    font-size: 12px;
+}
+
+.am-list-item{
+    background:#1A1A1B !important;
+}
+
+.am-modal-button-group-h .am-modal-button:first-child{
+    color:#DFDFDF;
+}
+.am-modal-button-group-h .am-modal-button:last-child{
+    color:#CAAC7B;
+}
+
+.am-modal-input input{
+    width: 100%;
+    padding:0;
+    background:none;
+    color:#DFDFDF;
+    border-bottom: 1px solid #46464A;
+}
+
+.am-list-item.am-list-item-middle{
+    min-height: 49px;
+}
+
+html:not([data-scale]) .am-list-body div:not(:last-child) .am-list-line::after{
+    background-color: #46464A;
+}
+
+.am-modal-button-group-v .am-modal-button:nth-child(1)::before{
+    display: none !important;}
+html:not([data-scale]) .am-modal-button-group-h::before{
+    background-color:#46464A;
+    display: none;
+}
+html:not([data-scale]) .am-modal-button-group-h .am-modal-button:last-child::before{
+    background-color:#46464A;
+    display: none;
+}

@@ -1,0 +1,41 @@
+{
+  "zh_CN":{
+    "appid":"﻿cash.axis.xplan",
+    "version":"0.0.1",
+    "title":"0.0.1初始版",
+    "note":"0.0.1体验发布",
+    "url":"https://axis.cash/app/xplan.html"
+  },
+
+  "en_US":{
+    "appid":"cash.axis.xplan",
+    "version":"0.0.1",
+    "title":"0.0.1 release",
+    "note":"0.0.1 release",
+    "url":"https://axis.cash/app/xplan.html"
+  },
+
+  "ja_JP":{
+    "appid":"cash.axis.xplan",
+    "version":"0.0.1",
+    "title":"0.0.1リリース",
+    "note":"0.0.1リリース",
+    "url":"https://axis.cash/app/xplan.html"
+  },
+
+  "be_BY":{
+    "appid":"cash.axis.xplan",
+    "version":"0.0.1",
+    "title":"0.0.1 выпуск",
+    "note":"0.0.1 выпуск",
+    "url":"https://axis.cash/app/xplan.html"
+  },
+
+  "ko_KR":{
+    "appid":"cash.axis.xplan",
+    "version":"0.0.1",
+    "title":"0.0.1 릴리스",
+    "note":"0.0.1 릴리스",
+    "url":"https://axis.cash/app/xplan.html"
+  }
+}
