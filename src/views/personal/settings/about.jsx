@@ -3,6 +3,7 @@ import {Icon, List, NavBar} from "antd-mobile";
 import {lang, url} from "../../../config/common";
 import axis from '../../../public/images/mine_logo@2x.png'
 import './about.css'
+import axios from 'axios';
 
 const urls = [
     {
@@ -34,42 +35,59 @@ class AboutUs extends Component {
     }
 
     componentDidMount() {
-        if(plus && plus.runtime){
-            this.setState({
-                version:plus.runtime.version
-            })
-        }
+        // if(plus && plus.runtime){
+        //     this.setState({
+        //         version:plus.runtime.version
+        //     })
+        // }
     }
 
     checkUpdate() {
-        console.log('checkupdate')
         const that = this;
         const ua = navigator.userAgent;
         if (ua.indexOf('Html5Plus') > -1 && ua.indexOf('StreamApp') === -1) {
-            let url = "https://github.com/axis-cash/xplan/other/client.json";
-            const localUtc = new Date().getTimezoneOffset() / 60;
-            if (localUtc === -8) {
-                url = "https://gitee.com/axis-cash/xplan/other/client.json";
-            }
+            let url = "https://raw.githubusercontent.com/axis-cash/xplan/master/other/client.json";
+            // const localUtc = new Date().getTimezoneOffset() / 60;
+            // if (localUtc === -8) {
+            //     url = "https://gitee.com/axis-cash/xplan/other/client.json";
+            // }
 
-            that.getReq(url,function (data,err) {
-                if(data){
-                    const rData = JSON.parse(data);
-                    const rsp = rData[lang.e().key];
-                    const version = rsp["version"];
-                    console.log("latest version:"+version);
-                    console.log("plus.runtime.version:"+plus.runtime.version);
-                    if (version !== plus.runtime.version) {
-                        plus.nativeUI.confirm(rsp["note"], function (event) {
+            axios.get(url)
+                .then( (response) => {
+                    let clientdata = response.data;
+                    if (version !== clientdata.version) {
+                        plus.nativeUI.confirm(clientdata.note, function (event) {
                             if (0 === event.index) {
-                                plus.runtime.openURL(rsp["url"]);
+                                plus.runtime.openURL(clientdata.url);
                             }
-                        }, rsp["title"], [lang.e().button.update, lang.e().button.cancel]);
+                        }, clientdata.title, [lang.e().button.update, lang.e().button.cancel]);
                     } else {
                         plus.nativeUI.alert(lang.e().toast.info.isLatest, function(){}, "AXIS Xplan", "OK");
                     }
-                }
-            })
+                })
+                .catch( (error) => {
+                    console.log(error);
+                });
+
+            // that.getReq(url,function (data,err) {
+            //     alert(JSON.stringify(data));
+            //     if(data){
+            //         const rData = JSON.parse(data);
+            //         const rsp = rData[lang.e().key];
+            //         const version = rsp["version"];
+            //         console.log("latest version:"+version);
+            //         console.log("plus.runtime.version:"+plus.runtime.version);
+            //         if (version !== plus.runtime.version) {
+            //             plus.nativeUI.confirm(rsp["note"], function (event) {
+            //                 if (0 === event.index) {
+            //                     plus.runtime.openURL(rsp["url"]);
+            //                 }
+            //             }, rsp["title"], [lang.e().button.update, lang.e().button.cancel]);
+            //         } else {
+            //             plus.nativeUI.alert(lang.e().toast.info.isLatest, function(){}, "AXIS Xplan", "OK");
+            //         }
+            //     }
+            // })
         }
     }
 
